@@ -1,4 +1,4 @@
-package per.wangsj.drawheart;
+package fsx.heart.drawheart;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -29,7 +29,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     private SurfaceHolder holder;
 
-    private Thread shthread;  // 心
+//    private Thread shthread;  // 心
 
     int w;
     int h;
@@ -66,33 +66,40 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     public void showHeart() // 画心
     {
-        shthread = new showheart(this.holder, "showback", this.w, this.h);
+        Thread shthread = new ShowHeart(this.holder, "showback", this.w, this.h,2.5f);
+        Thread shthread2 = new ShowHeart(this.holder, "showback2", this.w, this.h,1.8f);
         shthread.start();
+        shthread2.start();
     }
 
-    class showheart extends Thread {
+    class ShowHeart extends Thread {
         private SurfaceHolder holder;
         int sh;
         int sw;
+        float divisor;
 
-        public showheart(SurfaceHolder holder, String threadname, int sw, int sh) {
+        public ShowHeart(SurfaceHolder holder, String threadname, int sw, int sh,float divisor) {
             this.holder = holder;
             setName(threadname);
             this.sw = sw;
             this.sh = sh;
+            this.divisor = divisor;
         }
 
         public void run() {
             this.holder.setKeepScreenOn(true);
-            run_hua_heart();
+//            run_hua_heart(4);
+            run_hua_heart(divisor);
+//            run_hua_heart(1.5f);
 //            run_M_M();
         }
 
         /**
          * 画中间的心
          */
-        private void run_hua_heart() {
-            int startx = sw / 2 - 16, starty = sh / 2 - 68;
+        private void run_hua_heart(float divisor) {
+//            int startx = sw / 2 - 16, starty = sh / 2 - 68;
+            int startx = (int) ((sw / divisor) - 16), starty = sh / 2 - 68;
             int maxh = 100;
             double begin = 10; // 起始位置
             Random rm = new Random();

@@ -1,4 +1,4 @@
-package per.wangsj.drawheart;
+package fsx.heart.drawheart;
 
 import org.junit.Test;
 

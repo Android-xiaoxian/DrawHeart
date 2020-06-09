@@ -1,4 +1,4 @@
-package per.wangsj.drawheart;
+package fsx.heart.drawheart;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
