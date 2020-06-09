@@ -28,7 +28,8 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     BitmapCache bitmapcache;
 
     private SurfaceHolder holder;
-
+    private static final double radius = 13.5;//控制心的大小
+    private static final double density = 0.2;//花的密度
 //    private Thread shthread;  // 心
 
     int w;
@@ -38,7 +39,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         super(context);
         this.setFocusable(true);
         this.setKeepScreenOn(true);
-        mContext=context;
+        mContext = context;
         this.w = s_w;
         this.h = s_h;
         this.bitmapcache = BitmapCache.getInstance();
@@ -66,8 +67,8 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     public void showHeart() // 画心
     {
-        Thread shthread = new ShowHeart(this.holder, "showback", this.w, this.h,2.5f);
-        Thread shthread2 = new ShowHeart(this.holder, "showback2", this.w, this.h,1.8f);
+        Thread shthread = new ShowHeart(this.holder, "showback", this.w, this.h, 2.5f);
+        Thread shthread2 = new ShowHeart(this.holder, "showback2", this.w, this.h, 1.8f);
         shthread.start();
         shthread2.start();
     }
@@ -78,7 +79,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         int sw;
         float divisor;
 
-        public ShowHeart(SurfaceHolder holder, String threadname, int sw, int sh,float divisor) {
+        public ShowHeart(SurfaceHolder holder, String threadname, int sw, int sh, float divisor) {
             this.holder = holder;
             setName(threadname);
             this.sw = sw;
@@ -107,7 +108,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
             float old_xx = 0, old_yy = 0;
             Paint p = new Paint(); // 创建画笔
             p.setColor(Color.RED);
-            for (int i = 0; i < maxh ; i++) {
+            for (int i = 0; i < maxh; i++) {
                 try {
                     Thread.sleep(80);
                 } catch (InterruptedException e1) {
@@ -118,10 +119,10 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 int hua_num = rm.nextInt(18);
                 Bitmap bit = bitmapcache
                         .getBitmap(heart_all[hua_num], mContext);
-                begin = begin + 0.2; // 密度
+                begin = begin + density; // 密度
                 double b = begin / Math.PI;
-                double a = 13.5 * (16 * Math.pow(Math.sin(b), 3)); // 这里的13.5可以控制大小
-                double d = -13.5
+                double a = radius * (16 * Math.pow(Math.sin(b), 3)); // 这里的13.5可以控制大小
+                double d = -radius
                         * (13 * Math.cos(b) - 5 * Math.cos(2 * b) - 2
                         * Math.cos(3 * b) - Math.cos(4 * b));
                 synchronized (holder) {
