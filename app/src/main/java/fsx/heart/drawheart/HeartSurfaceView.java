@@ -18,22 +18,24 @@ import java.util.Random;
 
 public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     // 画爱心的蝴蝶
-    int[] heart_all = {R.mipmap.a1, R.mipmap.a2, R.mipmap.a3,
+    int[]       heart_all = {R.mipmap.a1, R.mipmap.a2, R.mipmap.a3,
             R.mipmap.a4, R.mipmap.a5, R.mipmap.a6, R.mipmap.a7,
             R.mipmap.a8, R.mipmap.a9, R.mipmap.a10, R.mipmap.a11,
             R.mipmap.a12, R.mipmap.a13, R.mipmap.a14, R.mipmap.a15,
             R.mipmap.a16, R.mipmap.a17, R.mipmap.a18, R.mipmap.a19};
-    Context mContext;
+    Context     mContext;
     // 图片软引用
     BitmapCache bitmapcache;
 
-    private SurfaceHolder holder;
-    private static final double radius = 13.5;//控制心的大小
-    private static final double density = 0.2;//花的密度
+    private              SurfaceHolder holder;
+    private static final double        radius  = 13.5;//控制心的大小
+    private static final double        density = 0.2;//花的密度
 //    private Thread shthread;  // 心
 
     int w;
     int h;
+    private int    maxh    = 100;;
+
 
     public HeartSurfaceView(Context context, int s_w, int s_h) {
         super(context);
@@ -75,8 +77,8 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     class ShowHeart extends Thread {
         private SurfaceHolder holder;
-        int sh;
-        int sw;
+        int   sh;
+        int   sw;
         float divisor;
 
         public ShowHeart(SurfaceHolder holder, String threadname, int sw, int sh, float divisor) {
@@ -100,13 +102,12 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
          */
         private void run_hua_heart(float divisor) {
 //            int startx = sw / 2 - 16, starty = sh / 2 - 68;
-            int startx = (int) ((sw / divisor) - 16), starty = sh / 2 - 68;
-            int maxh = 100;
-            double begin = 10; // 起始位置
-            Random rm = new Random();
-            int old_num = -1;
-            float old_xx = 0, old_yy = 0;
-            Paint p = new Paint(); // 创建画笔
+            int    startx  = (int) ((sw / divisor) - 16), starty = sh / 2 - 68;
+            double begin   = 10; // 起始位置
+            Random rm      = new Random();
+            int    old_num = -1;
+            float  old_xx  = 0, old_yy = 0;
+            Paint  p       = new Paint(); // 创建画笔
             p.setColor(Color.RED);
             for (int i = 0; i < maxh; i++) {
                 try {
@@ -115,7 +116,9 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                     // TODO 自动生成的 catch 块
                     e1.printStackTrace();
                 }
-
+                if (maxh == FINISH_TAG){
+                    return;
+                }
                 int hua_num = rm.nextInt(18);
                 Bitmap bit = bitmapcache
                         .getBitmap(heart_all[hua_num], mContext);
@@ -165,4 +168,10 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         }
     }
 
+    private static final int FINISH_TAG = 0;
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        maxh = FINISH_TAG;
+    }
 }
