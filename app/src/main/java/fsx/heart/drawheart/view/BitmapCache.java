@@ -1,4 +1,4 @@
-package fsx.heart.drawheart;
+package fsx.heart.drawheart.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

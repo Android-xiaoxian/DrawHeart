@@ -1,4 +1,4 @@
-package fsx.heart.drawheart;
+package fsx.heart.drawheart.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,6 +11,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.Random;
+
+import fsx.heart.drawheart.R;
+import fsx.heart.drawheart.view.BitmapCache;
 
 /**
  * Created by dell 王世举 on 2016/12/25 21:20.

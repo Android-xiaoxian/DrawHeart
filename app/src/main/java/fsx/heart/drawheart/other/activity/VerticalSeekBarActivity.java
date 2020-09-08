@@ -2,10 +2,9 @@ package fsx.heart.drawheart.other.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import fsx.heart.drawheart.R;
 import fsx.heart.drawheart.other.view.VerticalSeekBar;
