@@ -3,6 +3,8 @@ package fsx.heart.drawheart.other.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class VerticalSeekBarActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_vertical_seek_bar);
 
         txt_progress = findViewById(R.id.txt_progress);
