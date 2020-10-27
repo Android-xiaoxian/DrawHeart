@@ -3,10 +3,13 @@ package fsx.heart.drawheart.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.view.View;
 
 import fsx.heart.drawheart.R;
+import fsx.heart.drawheart.other.activity.ImageViewTestActivity;
 import fsx.heart.drawheart.other.activity.RecyclerViewTestActivity;
 import fsx.heart.drawheart.other.activity.VerticalSeekBarActivity;
 
@@ -25,19 +28,23 @@ public class GuideActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.txt_1).setOnClickListener(this);
         findViewById(R.id.txt_2).setOnClickListener(this);
         findViewById(R.id.txt_3).setOnClickListener(this);
+        findViewById(R.id.txt_4).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.txt_1:
                 startActivity(new Intent(GuideActivity.this, MainActivity.class));
                 break;
             case R.id.txt_2:
                 startActivity(new Intent(GuideActivity.this, VerticalSeekBarActivity.class));
                 break;
-                case R.id.txt_3:
+            case R.id.txt_3:
                 startActivity(new Intent(GuideActivity.this, RecyclerViewTestActivity.class));
+                break;
+            case R.id.txt_4:
+                startActivity(new Intent(GuideActivity.this, ImageViewTestActivity.class));
                 break;
             default:
                 break;
