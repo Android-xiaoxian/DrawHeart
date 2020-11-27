@@ -17,6 +17,11 @@ public class VerticalSeekBar extends AppCompatSeekBar {
 
     private SeekBar.OnSeekBarChangeListener mOnSeekBarChangeListener;
     int i = 0;
+
+    public void setMinProgress(int minProgress) {
+        this.minProgress = minProgress;
+    }
+
     private int minProgress = 20;
 
 
