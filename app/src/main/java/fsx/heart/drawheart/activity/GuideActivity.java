@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import android.view.View;
 
 import fsx.heart.drawheart.R;
+import fsx.heart.drawheart.other.activity.GridViewTestActivity;
 import fsx.heart.drawheart.other.activity.ImageViewTestActivity;
 import fsx.heart.drawheart.other.activity.RecyclerViewTestActivity;
 import fsx.heart.drawheart.other.activity.VerticalSeekBarActivity;
@@ -29,6 +30,7 @@ public class GuideActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.txt_2).setOnClickListener(this);
         findViewById(R.id.txt_3).setOnClickListener(this);
         findViewById(R.id.txt_4).setOnClickListener(this);
+        findViewById(R.id.txt_5).setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +47,9 @@ public class GuideActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.txt_4:
                 startActivity(new Intent(GuideActivity.this, ImageViewTestActivity.class));
+                break;
+            case R.id.txt_5:
+                startActivity(new Intent(GuideActivity.this, GridViewTestActivity.class));
                 break;
             default:
                 break;
