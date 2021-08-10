@@ -17,10 +17,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        release {
+            keyAlias 'heart'
+            keyPassword 'FSXloveYOU99'
+            storeFile file('fsx_heart.jks')
+            storePassword 'FSXloveYOU99'
+        }
+        debug {
+            keyAlias 'heart'
+            keyPassword 'FSXloveYOU99'
+            storeFile file('fsx_heart.jks')
+            storePassword 'FSXloveYOU99'
+        }
+        buildTypes {
+            debug {
+                signingConfig signingConfigs.debug
+            }
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
     applicationVariants.all { variant ->
         variant.outputs.all {
             def newApkName
-            newApkName = "Gift.apk"
+            newApkName = "Gift.apk" + "-" + buildType.name
             outputFileName = newApkName
 
         }

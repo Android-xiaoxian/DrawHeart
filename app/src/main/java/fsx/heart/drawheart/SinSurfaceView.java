@@ -17,7 +17,7 @@ import java.util.Random;
  * Created by dell 王世举 on 2016/12/25 21:20.
  */
 
-public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+public class SinSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     // 画爱心的蝴蝶
     int[] heart_all = {R.mipmap.a1,
             R.mipmap.a2,
@@ -50,7 +50,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     int w;
     int h;
 
-    public HeartSurfaceView(Context context, int s_w, int s_h) {
+    public SinSurfaceView(Context context, int s_w, int s_h) {
         super(context);
         this.setFocusable(true);
         this.setKeepScreenOn(true);
@@ -65,7 +65,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         holder.setFormat(PixelFormat.TRANSPARENT);
     }
 
-    public HeartSurfaceView(Context context) {
+    public SinSurfaceView(Context context) {
         super(context);
     }
 
@@ -124,58 +124,50 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
          * @param yDivisor 控件宽度/divisor = 心的中心点（Y轴）
          */
         private void run_hua_heart(float xDivisor, float yDivisor) {
-//            int startx = sw / 2 - 16, starty = sh / 2 - 68;
-            int startx = (int) ((sw / xDivisor) - 16);
-            int starty = (int) (sh / yDivisor - 68);
-            int maxh = 100;
-            double begin = 10; // 起始位置
             Random rm = new Random();
             int old_num = -1;
             float old_xx = 0, old_yy = 0;
             Paint p = new Paint(); // 创建画笔
             p.setColor(Color.RED);
-            for (int i = 0; i < maxh; i++) {
+
+            float x = 0;
+
+            for (int i = 0; i < Integer.MAX_VALUE; i++) {
                 try {
+                    if (x >= sw) {
+                        break;
+                    }
                     Thread.sleep(70);
                 } catch (InterruptedException e1) {
                     // TODO 自动生成的 catch 块
                     e1.printStackTrace();
                 }
-
                 int hua_num = rm.nextInt(18);
                 Bitmap bit = bitmapcache
                         .getBitmap(heart_all[hua_num], mContext);
-                begin = begin + density; // 密度
-                double b = begin / Math.PI;
-                double a = radius * (16 * Math.pow(Math.sin(b), 3)); // 这里的radius可以控制心的半径大小
-                double d = -radius
-                        * (13 * Math.cos(b) - 5 * Math.cos(2 * b) - 2
-                        * Math.cos(3 * b) - Math.cos(4 * b));
-
+                float y = sh / 2 + (float) Math.sin(x / (sw / 32)) * 100;
                 synchronized (holder) {
                     Canvas c = null;
                     try {
-                        float xx = (float) a;
-                        float yy = (float) d;
 
                         c = holder.lockCanvas(new Rect(
-                                (int) (startx + xx - 40),
-                                (int) (starty + yy - 40),
-                                (int) (startx + xx + 40),
-                                (int) (starty + yy + 40)));
-//                        Paint p = new Paint(); // 创建画笔
-//                        p.setColor(Color.RED);
+                                (int) (x - 20),
+                                (int) (y - 20),
+                                (int) (x + 20),
+                                (int) (y + 20)));
+
                         // 画上一个，要不然会闪烁
                         if (old_num != -1) {
                             Bitmap bb = bitmapcache.getBitmap(
                                     heart_all[old_num], mContext);
-                            c.drawBitmap(bb, startx + old_xx, starty + old_yy,
-                                    p);
+                            c.drawBitmap(bb, old_xx, old_yy, p);
                         }
-                        c.drawBitmap(bit, startx + xx, starty + yy, p);
+
+                        c.drawBitmap(bit, x, y, p);
                         old_num = hua_num;
-                        old_xx = xx;
-                        old_yy = yy;
+                        old_xx = x;
+                        old_yy = y;
+                        x += 5;
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {

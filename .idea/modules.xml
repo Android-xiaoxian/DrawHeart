@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DrawHeart.iml" filepath="$PROJECT_DIR$/DrawHeart.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/DrawHeart-app.iml" filepath="$PROJECT_DIR$/app/DrawHeart-app.iml" group="DrawHeart/app" />
-      <module fileurl="file://$PROJECT_DIR$/androidDemo-DrawHeart.iml" filepath="$PROJECT_DIR$/androidDemo-DrawHeart.iml" group="DrawHeart" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
