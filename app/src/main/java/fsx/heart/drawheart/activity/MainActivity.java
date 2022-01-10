@@ -1,7 +1,7 @@
-package fsx.heart.drawheart;
+package fsx.heart.drawheart.activity;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.ViewGroup;
@@ -9,9 +9,12 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import fsx.heart.drawheart.view.HeartSurfaceView;
+import fsx.heart.drawheart.R;
+
 public class MainActivity extends AppCompatActivity {
 
-    FrameLayout f1;
+    FrameLayout      f1;
     HeartSurfaceView fr;
     SinSurfaceView sf;
     SinYSurfaceView sfY;

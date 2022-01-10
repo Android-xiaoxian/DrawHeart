@@ -1,4 +1,4 @@
-package fsx.heart.drawheart;
+package fsx.heart.drawheart.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,12 +13,16 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
+import fsx.heart.drawheart.R;
+import fsx.heart.drawheart.view.BitmapCache;
+
 /**
  * Created by dell 王世举 on 2016/12/25 21:20.
  */
 
 public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     // 画爱心的蝴蝶
+
     int[] heart_all = {R.mipmap.a1,
             R.mipmap.a2,
             R.mipmap.a3,
@@ -43,12 +47,15 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     BitmapCache bitmapcache;
 
     private SurfaceHolder holder;
-    private static final double radius = 13.5;//控制心的半径大小
-    private static final double density = 0.2;//花的密度
+    private static final double radius = 15;//控制心的半径大小
+    private static final double density = 0.15;//花的密度
+
 //    private Thread shthread;  // 心
 
     int w;
     int h;
+    private int    maxh    = 130;//density * maxh  ≈ 20
+
 
     public HeartSurfaceView(Context context, int s_w, int s_h) {
         super(context);
@@ -86,12 +93,16 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     public void showHeart() // 画心
     {
-        Thread shThread = new ShowHeart(this.holder, "showback", this.w, this.h, 2f, 2);
-        Thread shThread2 = new ShowHeart(this.holder, "showback2", this.w, this.h, 4f, 4f);
-        Thread shThread3 = new ShowHeart(this.holder, "showback2", this.w, this.h, 0.75f, 0.75f);
-        shThread.start();
+        Thread shThread1 = new ShowHeart(this.holder, "showback1", this.w, this.h, 2f, 2);
+//        Thread shThread2 = new ShowHeart(this.holder, "showback2", this.w, this.h, 4f, 4f);
+//        Thread shThread3 = new ShowHeart(this.holder, "showback3", this.w, this.h, 1.3f, 1.3f);
+//        Thread shThread4 = new ShowHeart(this.holder, "showback4", this.w, this.h, 1.3f, 4f);
+//        Thread shThread5 = new ShowHeart(this.holder, "showback5", this.w, this.h, 4f, 1.3f);
+        shThread1.start();
 //        shThread2.start();
 //        shThread3.start();
+//        shThread4.start();
+//        shThread5.start();
     }
 
     class ShowHeart extends Thread {
@@ -125,9 +136,10 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
          */
         private void run_hua_heart(float xDivisor, float yDivisor) {
 //            int startx = sw / 2 - 16, starty = sh / 2 - 68;
+
             int startx = (int) ((sw / xDivisor) - 16);
             int starty = (int) (sh / yDivisor - 68);
-            int maxh = 100;
+//            int maxh = 100;//
             double begin = 10; // 起始位置
             Random rm = new Random();
             int old_num = -1;
@@ -141,7 +153,9 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                     // TODO 自动生成的 catch 块
                     e1.printStackTrace();
                 }
-
+                if (maxh == FINISH_TAG){
+                    return;
+                }
                 int hua_num = rm.nextInt(18);
                 Bitmap bit = bitmapcache
                         .getBitmap(heart_all[hua_num], mContext);
@@ -192,4 +206,10 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         }
     }
 
+    private static final int FINISH_TAG = 0;
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        maxh = FINISH_TAG;
+    }
 }

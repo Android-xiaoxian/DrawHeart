@@ -2,15 +2,27 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "fsx.heart.drawheart"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {//加上这句才能使用ButterKnife
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -40,6 +52,7 @@ android {
             }
         }
     }
+
     applicationVariants.all { variant ->
         variant.outputs.all {
             def newApkName
@@ -48,13 +61,26 @@ android {
 
         }
     }
+
+    //指定jdk版本
+    // Butterknife 需要 Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:25.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     testImplementation 'junit:junit:4.12'
+
+
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
+
+    //适配方案
+    implementation 'me.jessyan:autosize:1.2.0'
 }
