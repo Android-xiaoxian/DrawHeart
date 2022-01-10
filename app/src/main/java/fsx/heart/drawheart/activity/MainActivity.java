@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import fsx.heart.drawheart.SinSurfaceView;
+import fsx.heart.drawheart.SinYSurfaceView;
 import fsx.heart.drawheart.view.HeartSurfaceView;
 import fsx.heart.drawheart.R;
 
@@ -16,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     FrameLayout      f1;
     HeartSurfaceView fr;
-    SinSurfaceView sf;
-    SinYSurfaceView sfY;
+//    SinSurfaceView sf;
+//    SinYSurfaceView sfY;
 
     LinearLayout l1;
     private Context mContext;
@@ -36,21 +38,21 @@ public class MainActivity extends AppCompatActivity {
         l1 = ((LinearLayout) findViewById(R.id.l1));
 
         this.fr = new HeartSurfaceView(this, this.screen_w, this.screen_h);
-        this.sf = new SinSurfaceView(this, this.screen_w, this.screen_h);
-        this.sfY = new SinYSurfaceView(this, this.screen_w, this.screen_h);
+//        this.sf = new SinSurfaceView(this, this.screen_w, this.screen_h);
+//        this.sfY = new SinYSurfaceView(this, this.screen_w, this.screen_h);
         this.f1.removeAllViews();
-//        this.f1.addView(this.fr, new ViewGroup.LayoutParams(
+        this.f1.addView(this.fr, new ViewGroup.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT));
+
+//        this.f1.addView(this.sf, new ViewGroup.LayoutParams(
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.MATCH_PARENT));
+//        this.f1.addView(this.sfY, new ViewGroup.LayoutParams(
 //                WindowManager.LayoutParams.MATCH_PARENT,
 //                WindowManager.LayoutParams.MATCH_PARENT));
 
-        this.f1.addView(this.sf, new ViewGroup.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT));
-        this.f1.addView(this.sfY, new ViewGroup.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT));
 
-
-//        fr.showHeart();
+        fr.showHeart();
     }
 }

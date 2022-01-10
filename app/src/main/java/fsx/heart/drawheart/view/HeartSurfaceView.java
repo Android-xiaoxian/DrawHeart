@@ -19,7 +19,6 @@ import fsx.heart.drawheart.view.BitmapCache;
 /**
  * Created by dell 王世举 on 2016/12/25 21:20.
  */
-
 public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     // 画爱心的蝴蝶
 

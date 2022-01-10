@@ -13,6 +13,8 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
+import fsx.heart.drawheart.view.BitmapCache;
+
 /**
  * Created by dell 王世举 on 2016/12/25 21:20.
  */

@@ -31,6 +31,8 @@ public class GuideActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.txt_3).setOnClickListener(this);
         findViewById(R.id.txt_4).setOnClickListener(this);
         findViewById(R.id.txt_5).setOnClickListener(this);
+        startActivity(new Intent(GuideActivity.this, MainActivity.class));
+        finish();
     }
 
     @Override
